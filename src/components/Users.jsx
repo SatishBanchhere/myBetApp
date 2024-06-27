@@ -10,9 +10,10 @@ export const Users = () => {
     useEffect(() => {
         const fetchUsers = async () => {
             try {
-                const response = await axios.post("http://myupiappbackend.onrender.com/user/bulk", {
+                const response = await axios.post("https://mybetappbackend.onrender.com/user/bulk", {
                     filter: filter
                 });
+                
                 console.log("API Response:", response.data); // Debug log
                 const loggedInUserId = localStorage.getItem("userId");
                 console.log("Logged-in User ID:", loggedInUserId); // Debug log
