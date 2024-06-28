@@ -21,8 +21,8 @@ To get a local copy up and running, follow these steps:
 
 1. **Clone the repository:**
    ```bash
-   git clone https://github.com/your-username/my-bet-app.git
-   cd my-bet-app
+   git clone https://github.com/SatishBanchhere/myBetApp.git
+   cd myBetApp
 
 2. **Install dependencies:**
    ```bash
@@ -69,4 +69,3 @@ This project is licensed under the MIT License. See the LICENSE file for more de
 - **Zod** - TypeScript-first schema declaration and validation library.
 - **Mongoose** - Elegant MongoDB object modeling for Node.js.
 
-Feel free to adjust the details and links (e.g., the GitHub repository URL) to match your specific project setup.
