@@ -3,6 +3,8 @@
 ## Overview
 My Bet App is a platform that allows users to make bets with each other and send money directly. The app provides a random mechanism for distributing money when bets are made. Additionally, it stores and displays the transaction and bet history for each user.
 
+**This site is hosted at [https://my-bet-app.vercel.app/](https://my-bet-app.vercel.app/)**
+
 ## Features
 - **Send Money Directly:** Users can transfer money directly to each other.
 - **Make Bets:** Users can make bets, and the money is distributed randomly to one of the participants.
