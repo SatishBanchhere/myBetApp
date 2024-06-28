@@ -23,7 +23,7 @@ To get a local copy up and running, follow these steps:
    ```bash
    git clone https://github.com/your-username/my-bet-app.git
    cd my-bet-app
-   ```bash
+```bash
 2. **Install dependencies:**
    ```bash
    npm install
