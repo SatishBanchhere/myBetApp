@@ -44,16 +44,25 @@ export const BetMoney = () => {
                             />
                         </div>
                         <button onClick={() => {
-                            console.log(id);
-                            axios.post("https://mybetappbackend.onrender.com/account/bet", {
-                                to: id,
-                                amount
-                            }, {
-                                headers: {
-                                    authorization: "Bearer " + localStorage.getItem("token")
-                                }
-                            })
-                            navigate("/dashboard");
+                            try {
+                                const response = await axios.post("https://mybetappbackend.onrender.com/account/bet", {
+                                    to: id,
+                                    amount
+                                }, {
+                                    headers: {
+                                        Authorization: "Bearer " + localStorage.getItem("token")
+                                    }
+                                });
+                                console.log(response.data); // Handle response if needed
+                                navigate("/dashboard");
+                            } catch (error) {
+                                console.error("Error initiating transfer:", error);
+                                setErrorMessage("Insufficient balance or incorrect amount value.");
+                                // if (error.response && error.response.status === 400) {
+                                // } else {
+                                //     setErrorMessage("An error occurred while processing your request.");
+                                // }
+                            }
                         }} className="justify-center rounded-md text-sm font-medium ring-offset-background transition-colors h-10 px-4 py-2 w-full bg-green-500 text-white">
                             Initiate Bet
                         </button>
