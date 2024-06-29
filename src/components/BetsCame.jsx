@@ -31,7 +31,7 @@ export const BetsCame = ({balance}) => {
         return () => clearInterval(interval); // Cleanup interval on component unmount
     }, []);
 
-    const handleAccept = async (bet) => {
+    const handleAccept = async (betId) => {
         try {
             const response = await axios.put("https://mybetappbackend.onrender.com/bets/set", { bet._id }, {
                 headers: {
@@ -94,7 +94,7 @@ export const BetsCame = ({balance}) => {
                             </p>
                         </div>
                         <button 
-                            onClick={() => handleAccept(bet)}
+                            onClick={() => handleAccept(bet._id)}
                             className={`font-bold py-2 px-4 rounded ${
                                 wonBets[bet._id] === true ? 'bg-green-500 text-white' :
                                 wonBets[bet._id] === false ? 'bg-red-500 text-white' :
