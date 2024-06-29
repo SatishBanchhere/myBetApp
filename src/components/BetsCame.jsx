@@ -95,7 +95,7 @@ export const BetsCame = ({balance}) => {
                         </div>
                         <button 
                             onClick={() => 
-                                if(bet.amount <= balance){
+                                if(bet.amount <== balance){
                                 handleAccept(bet._id)
                             }
                             }
