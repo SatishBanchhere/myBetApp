@@ -79,11 +79,12 @@ export const BetsCame = ({balance}) => {
     }
 
     return (
-        <div className="p-4">
-            <h2 className="text-2xl font-bold mb-4 text-center">Bets Came</h2>
-            <ul className="space-y-4">
-                {bets.map((bet, index) => (
-                    <li key={index} className="bg-white shadow-md rounded-lg p-4 border border-gray-200 flex items-center justify-between">
+    <div className="p-4">
+        <h2 className="text-2xl font-bold mb-4 text-center">Bets Came</h2>
+        <ul className="space-y-4">
+            {bets.map((bet, index) => (
+                <li key={index} className="bg-white shadow-md rounded-lg p-4 border border-gray-200 flex flex-col items-start">
+                    <div className="flex justify-between w-full">
                         <div>
                             <p className="text-lg">
                                 <span className="font-semibold">Amount:</span> ₹{bet.amount}
@@ -101,12 +102,13 @@ export const BetsCame = ({balance}) => {
                             }`}>
                             {wonBets[bet._id] === true ? 'Won Bet Amount' : 'Accept'}
                         </button>
-                        <p>{bet.amount >= balance ? "Insufficient balance" : <></>}</p>
-
-                    </li>
-                    
-                ))}
-            </ul>
-        </div>
-    );
+                    </div>
+                    {bet.amount >= balance && (
+                        <p className="mt-2 text-red-500 font-semibold">Insufficient balance</p>
+                    )}
+                </li>
+            ))}
+        </ul>
+    </div>
+  );
 };
