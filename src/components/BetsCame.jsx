@@ -15,7 +15,12 @@ export const BetsCame = ({balance}) => {
                     authorization: "Bearer " + localStorage.getItem("token")
                 }
             });
-            setBets(response.data);
+            if(response.status === 400){
+                setBetError("Insufficient Money in opponent's account")
+            }
+            else{
+                setBets(response.data);
+            }
             setLoading(false);
         } catch (error) {
             console.error('Error fetching bets:', error);
@@ -112,6 +117,10 @@ export const BetsCame = ({balance}) => {
                     {bet.amount >= balance && (
                         <p className="mt-2 text-red-500 font-semibold">Insufficient balance</p>
                     )}
+                    {
+                        beterror &&(
+                            <p className="mt-2 text-red-500 font-semibold">{"Insufficient balance in " + bet.fromUser + "'s account."}</p>
+                    }
                 </li>
             ))}
         </ul>
