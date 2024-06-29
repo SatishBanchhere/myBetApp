@@ -120,7 +120,7 @@ export const BetsCame = ({balance}) => {
                     {
                         beterror &&(
                             <p className="mt-2 text-red-500 font-semibold">{"Insufficient balance in " + bet.fromUser + "'s account."}</p>
-                    }
+                    )}
                 </li>
             ))}
         </ul>
