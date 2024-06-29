@@ -43,19 +43,19 @@ export const Signup = () => {
           />
           <InputBox
             onChange={(e) => setFirstName(e.target.value)}
-            placeholder="Satish"
+            placeholder="John"
             label={"First Name"}
             className="mt-4"
           />
           <InputBox
             onChange={(e) => setLastName(e.target.value)}
-            placeholder="Banchhere"
+            placeholder="Doe"
             label={"Last Name"}
             className="mt-4"
           />
           <InputBox
             onChange={(e) => setUsername(e.target.value)}
-            placeholder="satish@gmail.com"
+            placeholder="John@gmail.com"
             label={"Email"}
             className="mt-4"
           />
