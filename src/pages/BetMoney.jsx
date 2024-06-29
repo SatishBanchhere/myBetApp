@@ -48,7 +48,7 @@ export const BetMoney = () => {
                                 <p className="text-xs text-red-500 mt-1">{errorMessage}</p>
                             )}
                         </div>
-                        <button onClick={() => {
+                        <button onClick={async () => {
                             try {
                                 const response = await axios.post("https://mybetappbackend.onrender.com/account/bet", {
                                     to: id,
