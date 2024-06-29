@@ -33,7 +33,7 @@ export const BetsCame = ({balance}) => {
 
     const handleAccept = async (betId) => {
         try {
-            const response = await axios.put("https://mybetappbackend.onrender.com/bets/set", { bet._id }, {
+            const response = await axios.put("https://mybetappbackend.onrender.com/bets/set", { betId }, {
                 headers: {
                     authorization: "Bearer " + localStorage.getItem("token")
                 }
