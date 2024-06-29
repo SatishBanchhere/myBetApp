@@ -1,10 +1,11 @@
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 
-export const BetsCame = () => {
+export const BetsCame = ({balance}) => {
     const [bets, setBets] = useState([]);
     const [loading, setLoading] = useState(true);
     const [error, setError] = useState(null);
+    const [beterror, setBetError] = useState(null);
     const [wonBets, setWonBets] = useState({}); // New state to track won bets
 
     const fetchBets = async () => {
@@ -100,7 +101,9 @@ export const BetsCame = () => {
                             }`}>
                             {wonBets[bet._id] === true ? 'Won Bet Amount' : 'Accept'}
                         </button>
+                        <p>{bet.amount >= balance ? <></> : "Insufficient balance"}</p>
                     </li>
+                    
                 ))}
             </ul>
         </div>
