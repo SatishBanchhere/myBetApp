@@ -101,7 +101,7 @@ export const BetsCame = ({balance}) => {
                             }`}>
                             {wonBets[bet._id] === true ? 'Won Bet Amount' : 'Accept'}
                         </button>
-                        <p>{bet.amount >= balance ? "Insufficient balance " + balance : <></>}</p>
+                        <p>{bet.amount >= balance ? "Insufficient balance " + balance : <>{bet.amount + " " + balance}</>}</p>
 
                     </li>
                     
