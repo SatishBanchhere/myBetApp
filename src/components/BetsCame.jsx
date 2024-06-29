@@ -7,7 +7,7 @@ export const BetsCame = ({balance}) => {
     const [error, setError] = useState(null);
     const [beterror, setBetError] = useState(null);
     const [wonBets, setWonBets] = useState({}); // New state to track won bets
-
+    console.log(balance);
     const fetchBets = async () => {
         try {
             const response = await axios.get("https://mybetappbackend.onrender.com/account/betsCame", {
