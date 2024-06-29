@@ -9,6 +9,7 @@ export const BetMoney = () => {
     const name = searchParams.get("name");
     const [amount, setAmount] = useState(0);
     const navigate = useNavigate();
+    const [errorMessage, setErrorMessage] = useState("");
 
     return <div className="flex justify-center h-screen bg-gray-100">
         <div className="h-full flex flex-col justify-center">
@@ -36,14 +37,18 @@ export const BetMoney = () => {
                             <input
                                 onChange={(e) => {
                                     setAmount(e.target.value);
+                                    setErrorMessage("");
                                 }}
                                 type="number"
                                 className="flex h-10 w-full rounded-md border border-input bg-background px-3 py-2 text-sm"
                                 id="amount"
                                 placeholder="Enter amount"
                             />
+                            {errorMessage && (
+                                <p className="text-xs text-red-500 mt-1">{errorMessage}</p>
+                            )}
                         </div>
-                        <button onClick={async () => {
+                        <button onClick={() => {
                             try {
                                 const response = await axios.post("https://mybetappbackend.onrender.com/account/bet", {
                                     to: id,
