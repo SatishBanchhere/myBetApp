@@ -28,11 +28,7 @@ export const Signup = () => {
       localStorage.setItem("username", response.data.username);
       navigate("/dashboard");
     } catch (error) {
-      if (error.response && error.response.status === 400) {
-        setError("Invalid input. Please check your details and try again.");
-      } else {
-        setError("An error occurred. Please try again later.");
-      }
+      setError("Invalid input. Please check your details and try again.");
     }
   };
 
