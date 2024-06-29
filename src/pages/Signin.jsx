@@ -23,11 +23,7 @@ export const Signin = () => {
       localStorage.setItem("username", response.data.username);
       navigate("/dashboard");
     } catch (error) {
-      if (error.response && error.response.status === 401) {
-        setError("Incorrect username or password. Please try again.");
-      } else {
-        setError("An error occurred. Please try again later.");
-      }
+      setError("Incorrect username or password. Please try again.");
     }
   };
 
