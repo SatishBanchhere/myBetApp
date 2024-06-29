@@ -28,7 +28,8 @@ export const Dashboard = () => {
                         Authorization: `Bearer ${token}`
                     }
                 });
-
+                console.log(response.data);
+                console.log(token);
                 setBalance(prevBalance => {
                     setPreviousBalance(prevBalance);
                     return response.data.balance;

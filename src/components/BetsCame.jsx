@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 
-export const BetsCame = ({balance}) => {
+export const BetsCame = ({ balance }) => {
     const [bets, setBets] = useState([]);
     const [loading, setLoading] = useState(true);
     const [error, setError] = useState(null);
@@ -16,10 +16,10 @@ export const BetsCame = ({balance}) => {
                 }
             });
             console.log(response.status);
-            if(response.status === 400){
+            if (response.status === 400) {
                 setBetError("Insufficient Money in opponent's account")
             }
-            else{
+            else {
                 setBets(response.data);
             }
             setLoading(false);
@@ -33,7 +33,7 @@ export const BetsCame = ({balance}) => {
     useEffect(() => {
         fetchBets();
         const interval = setInterval(fetchBets, 3000);
-        
+
         return () => clearInterval(interval); // Cleanup interval on component unmount
     }, []);
 
@@ -44,6 +44,7 @@ export const BetsCame = ({balance}) => {
                     authorization: "Bearer " + localStorage.getItem("token")
                 }
             });
+            console.log(response.status);
             const updatedBet = response.data;
             const userId = localStorage.getItem("userId"); // Assuming user ID is stored in local storage
 
@@ -66,13 +67,13 @@ export const BetsCame = ({balance}) => {
                         authorization: "Bearer " + localStorage.getItem("token")
                     }
                 });
-                console.log(response.data);
+                console.log(response.status);
             } catch (error) {
                 console.error('Error updating balances:', error);
             }
 
         } catch (error) {
-            console.error('Error accepting bet:', error);
+            setBetError("sdjbhs");
         }
     };
 
@@ -85,46 +86,45 @@ export const BetsCame = ({balance}) => {
     }
 
     return (
-    <div className="p-4">
-        <h2 className="text-2xl font-bold mb-4 text-center">Bets Came</h2>
-        <ul className="space-y-4">
-            {bets.map((bet, index) => (
-                <li key={index} className="bg-white shadow-md rounded-lg p-4 border border-gray-200 flex flex-col items-start">
-                    <div className="flex justify-between w-full">
-                        <div>
-                            <p className="text-lg">
-                                <span className="font-semibold">Amount:</span> ₹{bet.amount}
-                            </p>
-                            <p className="text-lg">
-                                <span className="font-semibold">Bet made by:</span> {" " + bet.fromUser}
-                            </p>
+        <div className="p-4">
+            <h2 className="text-2xl font-bold mb-4 text-center">Bets Came</h2>
+            <ul className="space-y-4">
+                {bets.map((bet, index) => (
+                    <li key={index} className="bg-white shadow-md rounded-lg p-4 border border-gray-200 flex flex-col items-start">
+                        <div className="flex justify-between w-full">
+                            <div>
+                                <p className="text-lg">
+                                    <span className="font-semibold">Amount:</span> ₹{bet.amount}
+                                </p>
+                                <p className="text-lg">
+                                    <span className="font-semibold">Bet made by:</span> {" " + bet.fromUser}
+                                </p>
+                            </div>
+                            <button
+                                onClick={() => {
+                                    console.log("wow");
+                                    if (bet.amount <= balance) {
+                                        handleAccept(bet._id)
+                                    }
+
+                                }}
+                                className={`font-bold py-2 px-4 rounded ${wonBets[bet._id] === true ? 'bg-green-500 text-white' :
+                                    wonBets[bet._id] === false ? 'bg-red-500 text-white' :
+                                        'bg-blue-500 text-white hover:bg-blue-700'
+                                    }`}>
+                                {wonBets[bet._id] === true ? 'Won Bet Amount' : 'Accept'}
+                            </button>
                         </div>
-                        <button 
-                            onClick={() => {
-                                
-                                if(bet.amount <= balance){
-                                handleAccept(bet._id)
-                            }
-                            }
-                            }
-                            className={`font-bold py-2 px-4 rounded ${
-                                wonBets[bet._id] === true ? 'bg-green-500 text-white' :
-                                wonBets[bet._id] === false ? 'bg-red-500 text-white' :
-                                'bg-blue-500 text-white hover:bg-blue-700'
-                            }`}>
-                            {wonBets[bet._id] === true ? 'Won Bet Amount' : 'Accept'}
-                        </button>
-                    </div>
-                    {bet.amount >= balance && (
-                        <p className="mt-2 text-red-500 font-semibold">Insufficient balance</p>
-                    )}
-                    {
-                        beterror &&(
-                            <p className="mt-2 text-red-500 font-semibold">{"Insufficient balance in " + bet.fromUser + "'s account."}</p>
-                    )}
-                </li>
-            ))}
-        </ul>
-    </div>
-  );
+                        {bet.amount >= balance && (
+                            <p className="mt-2 text-red-500 font-semibold">Insufficient balance</p>
+                        )}
+                        {
+                            beterror && (
+                                <p className="mt-2 text-red-500 font-semibold">{"Insufficient balance in " + bet.fromUser + "'s account."}</p>
+                            )}
+                    </li>
+                ))}
+            </ul>
+        </div>
+    );
 };
