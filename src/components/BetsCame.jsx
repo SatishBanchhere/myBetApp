@@ -94,9 +94,11 @@ export const BetsCame = ({balance}) => {
                             </p>
                         </div>
                         <button 
-                            onClick={() => 
+                            onClick={() => {
+                                
                                 if(bet.amount <== balance){
                                 handleAccept(bet._id)
+                            }
                             }
                             }
                             className={`font-bold py-2 px-4 rounded ${
