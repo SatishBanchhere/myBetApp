@@ -15,6 +15,7 @@ export const BetsCame = ({balance}) => {
                     authorization: "Bearer " + localStorage.getItem("token")
                 }
             });
+            console.log(response.status);
             if(response.status === 400){
                 setBetError("Insufficient Money in opponent's account")
             }
