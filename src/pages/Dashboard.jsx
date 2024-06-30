@@ -2,11 +2,9 @@ import { useEffect, useState } from "react";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
 import { Appbar } from "../components/Appbar";
-import { Balance } from "../components/Balance";
 import { BetsMade } from "../components/BetsMade";
 import { BetsCame } from "../components/BetsCame";
 import { Users } from "../components/Users";
-import { Results } from "../components/Results";
 import { ShowHistory } from "../components/ShowHistory";
 
 export const Dashboard = () => {
@@ -28,8 +26,6 @@ export const Dashboard = () => {
                         Authorization: `Bearer ${token}`
                     }
                 });
-                console.log(response.data);
-                console.log(token);
                 setBalance(prevBalance => {
                     setPreviousBalance(prevBalance);
                     return response.data.balance;
@@ -63,7 +59,7 @@ export const Dashboard = () => {
 
     const getBalanceTextClass = () => {
         if (previousBalance === null || previousBalance === balance) {
-            return "";
+            return "text-gray-800"; // Default text color
         }
 
         const change = balance - previousBalance;
@@ -77,8 +73,9 @@ export const Dashboard = () => {
                 <div className="bg-white rounded-lg shadow-md p-4 mb-8">
                     <h2 className="text-2xl font-bold mb-4 text-center text-gray-800">Your Account Balance</h2>
                     {balance !== null ? (
-                        <div className={getBalanceTextClass()}>
-                            <Balance value={balance} />
+                        <div className={`text-4xl font-bold ${getBalanceTextClass()}`}>
+                            {/* <Balance value={balance} colour={getBalanceTextClass}/> */}
+                            Your Balance : ₹ {parseFloat(value).toFixed(2)}
                             {renderBalanceChange()}
                         </div>
                     ) : (
