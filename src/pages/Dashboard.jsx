@@ -75,7 +75,7 @@ export const Dashboard = () => {
                     {balance !== null ? (
                         <div className={`text-4xl font-bold ${getBalanceTextClass()}`}>
                             {/* <Balance value={balance} colour={getBalanceTextClass}/> */}
-                            Your Balance : ₹ {parseFloat(value).toFixed(2)}
+                            Your Balance : ₹ {parseFloat(balance).toFixed(2)}
                             {renderBalanceChange()}
                         </div>
                     ) : (
