@@ -57,8 +57,8 @@ export const Users = () => {
 
 function User({ user, navigate }) {
     return (
-        <div className="flex justify-between" key={user._id}>
-            <div className="flex">
+        <div className="flex flex-col md:flex-row justify-between" key={user._id}>
+            <div className="flex flex-col md:flex-row">
                 <div className="rounded-full h-12 w-12 bg-slate-200 flex justify-center mt-1 mr-2">
                     <div className="flex flex-col justify-center h-full text-xl">
                         {user.firstName[0]}
@@ -68,7 +68,7 @@ function User({ user, navigate }) {
                     <div>{user.firstName} {user.lastName}</div>
                 </div>
             </div>
-            <div className="flex">
+            <div className="flex mt-2 md:mt-0">
                 <div className="flex flex-col justify-center h-full px-1">
                     <Button
                         onClick={() => navigate("/send?id=" + user._id + "&name=" + user.firstName)}
@@ -85,3 +85,4 @@ function User({ user, navigate }) {
         </div>
     );
 }
+
