@@ -2,6 +2,8 @@ import { useEffect, useState } from "react";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
 import { Button } from "./Button";
+import config from "../config";
+const BASE_URL = config.BASE_URL;
 
 export const Users = () => {
     const [users, setUsers] = useState([]);
@@ -10,7 +12,7 @@ export const Users = () => {
     useEffect(() => {
         const fetchUsers = async () => {
             try {
-                const response = await axios.post("https://mybetappbackend.onrender.com/user/bulk", {
+                const response = await axios.post(BASE_URL + "/user/bulk", {
                     filter: filter
                 });
                 

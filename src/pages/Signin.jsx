@@ -5,6 +5,8 @@ import { InputBox } from "../components/InputBox";
 import { SubHeading } from "../components/SubHeading";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
+import config from "../config";
+const BASE_URL = config.BASE_URL;
 
 export const Signin = () => {
   const [username, setUsername] = useState("");
@@ -14,7 +16,7 @@ export const Signin = () => {
 
   const handleSignIn = async () => {
     try {
-      const response = await axios.post("https://mybetappbackend.onrender.com/user/signin", {
+      const response = await axios.post(`${BASE_URL}/user/signin`, {
         username,
         password,
       });

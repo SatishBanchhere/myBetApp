@@ -1,11 +1,13 @@
 import { useState } from "react";
 import { BottomWarning } from "../components/BottomWarning";
-import { Button } from "../components/Button";
 import { Heading } from "../components/Heading";
 import { InputBox } from "../components/InputBox";
 import { SubHeading } from "../components/SubHeading";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
+import config from "../config";
+const BASE_URL = config.BASE_URL;
+
 
 export const Signup = () => {
   const [firstName, setFirstName] = useState("");
@@ -17,7 +19,7 @@ export const Signup = () => {
 
   const handleSignUp = async () => {
     try {
-      const response = await axios.post("https://mybetappbackend.onrender.com/user/signup", {
+      const response = await axios.post(`${BASE_URL}/user/signup`, {
         username,
         firstName,
         lastName,

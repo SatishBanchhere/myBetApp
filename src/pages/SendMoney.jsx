@@ -3,6 +3,9 @@ import axios from "axios";
 import { useState } from 'react';
 import { useNavigate } from "react-router-dom";
 
+import config from "../config";
+const BASE_URL = config.BASE_URL;
+
 export const SendMoney = () => {
     const [searchParams] = useSearchParams();
     const id = searchParams.get("id");
@@ -13,7 +16,7 @@ export const SendMoney = () => {
 
     const initiateTransfer = async () => {
         try {
-            const response = await axios.post("https://mybetappbackend.onrender.com/account/transfer", {
+            const response = await axios.post(`${BASE_URL}/account/transfer`, {
                 to: id,
                 amount
             }, {

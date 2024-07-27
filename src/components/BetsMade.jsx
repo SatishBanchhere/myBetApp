@@ -1,5 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
+import config from "../config";
+const BASE_URL = config.BASE_URL;
 
 export const BetsMade = () => {
     const [bets, setBets] = useState([]);
@@ -9,7 +11,7 @@ export const BetsMade = () => {
     useEffect(() => {
         const fetchBets = async () => {
             try {
-                const response = await axios.get("https://mybetappbackend.onrender.com/account/betsMade", {
+                const response = await axios.get(BASE_URL + "/account/betsMade", {
                     headers: {
                         authorization: "Bearer " + localStorage.getItem("token")
                     }

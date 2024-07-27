@@ -1,5 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
+import config from "../config";
+const BASE_URL = config.BASE_URL;
 
 export const Results = ({ setValue, value }) => {
     const [results, setResults] = useState([]);
@@ -10,7 +12,7 @@ export const Results = ({ setValue, value }) => {
         const fetchResults = async () => {
             try {
                 setLoading(true);
-                const response = await axios.post("https://mybetappbackend.onrender.com/bets/results", {
+                const response = await axios.post(BASE_URL + "/bets/results", {
                     page: 1, // Assuming you fetch all results at once
                     pageSize: 10 // Adjust page size as needed
                 }, {
@@ -69,7 +71,7 @@ function AgainstName({ userId }) {
     useEffect(() => {
         const fetchUserNames = async () => {
             try {
-                const response = await axios.get(`https://mybetappbackend.onrender.com/bets/name`, {
+                const response = await axios.get(BASE_URL + `/bets/name`, {
                     params: { userId }, // Pass userId as a query parameter
                     headers: {
                         authorization: "Bearer " + localStorage.getItem("token")

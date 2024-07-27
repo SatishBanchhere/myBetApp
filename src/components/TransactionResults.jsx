@@ -1,5 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
+import config from "../config";
+const BASE_URL = config.BASE_URL;
 
 export const Transactions = () => {
     const [transactions, setTransactions] = useState([]);
@@ -11,7 +13,7 @@ export const Transactions = () => {
             try {
                 setLoading(true);
                 const token = localStorage.getItem('token');
-                const response = await axios.get('https://mybetappbackend.onrender.com/transactions/transactions', {
+                const response = await axios.get(BASE_URL + '/transactions/transactions', {
                     headers: {
                         Authorization: `Bearer ${token}`
                     }

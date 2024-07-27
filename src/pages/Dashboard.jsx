@@ -6,6 +6,8 @@ import { BetsMade } from "../components/BetsMade";
 import { BetsCame } from "../components/BetsCame";
 import { Users } from "../components/Users";
 import { ShowHistory } from "../components/ShowHistory";
+import config from "../config";
+const BASE_URL = config.BASE_URL;
 
 export const Dashboard = () => {
     const [balance, setBalance] = useState(null);
@@ -21,7 +23,7 @@ export const Dashboard = () => {
                     return;
                 }
 
-                const response = await axios.get("https://mybetappbackend.onrender.com/account/balance", {
+                const response = await axios.get(`${BASE_URL}/account/balance`, {
                     headers: {
                         Authorization: `Bearer ${token}`
                     }

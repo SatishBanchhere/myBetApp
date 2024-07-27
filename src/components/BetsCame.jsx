@@ -1,5 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
+import config from "../config";
+const BASE_URL = config.BASE_URL;
 
 export const BetsCame = ({ balance }) => {
     const [bets, setBets] = useState([]);
@@ -10,7 +12,7 @@ export const BetsCame = ({ balance }) => {
     console.log(balance);
     const fetchBets = async () => {
         try {
-            const response = await axios.get("https://mybetappbackend.onrender.com/account/betsCame", {
+            const response = await axios.get(`${BASE_URL}/account/betsCame`, {
                 headers: {
                     authorization: "Bearer " + localStorage.getItem("token")
                 }
@@ -39,7 +41,7 @@ export const BetsCame = ({ balance }) => {
 
     const handleAccept = async (betId) => {
         try {
-            const response = await axios.put("https://mybetappbackend.onrender.com/bets/set", { betId }, {
+            const response = await axios.put(`${BASE_URL}/bets/set`, { betId }, {
                 headers: {
                     authorization: "Bearer " + localStorage.getItem("token")
                 }
@@ -58,7 +60,7 @@ export const BetsCame = ({ balance }) => {
             setBets(bets.filter(bet => bet._id !== betId));
 
             try {
-                const response = await axios.post("https://mybetappbackend.onrender.com/bets/setResults", {
+                const response = await axios.post(`${BASE_URL}/bets/setResults`, {
                     winner: updatedBet.Winner,
                     looser: updatedBet.Looser,
                     amount: updatedBet.amount

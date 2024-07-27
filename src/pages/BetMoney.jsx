@@ -2,6 +2,8 @@ import { useSearchParams } from 'react-router-dom';
 import axios from "axios";
 import { useState } from 'react';
 import { useNavigate } from "react-router-dom";
+import config from "../config";
+const BASE_URL = config.BASE_URL;
 
 export const BetMoney = () => {
     const [searchParams] = useSearchParams();
@@ -50,7 +52,7 @@ export const BetMoney = () => {
                         </div>
                         <button onClick={async () => {
                             try {
-                                const response = await axios.post("https://mybetappbackend.onrender.com/account/bet", {
+                                const response = await axios.post(`${BASE_URL}/account/bet`, {
                                     to: id,
                                     amount
                                 }, {
