@@ -1,75 +1,76 @@
-import { useSearchParams } from 'react-router-dom';
-import axios from "axios";
-import { useState } from 'react';
-import { useNavigate } from "react-router-dom";
-
-import config from "../config";
-const BASE_URL = config.BASE_URL;
+import { useSearchParams } from "react-router-dom"
+import axios from "axios"
+import { useState } from "react"
+import { useNavigate } from "react-router-dom"
+import config from "../config"
+import {Appbar} from "../components/Appbar.jsx";
+const BASE_URL = config.BASE_URL
 
 export const SendMoney = () => {
-    const [searchParams] = useSearchParams();
-    const id = searchParams.get("id");
-    const name = searchParams.get("name");
-    const [amount, setAmount] = useState(0);
-    const [errorMessage, setErrorMessage] = useState("");
-    const navigate = useNavigate();
+    const [searchParams] = useSearchParams()
+    const id = searchParams.get("id")
+    const name = searchParams.get("name")
+    const [amount, setAmount] = useState(0)
+    const [errorMessage, setErrorMessage] = useState("")
+    const navigate = useNavigate()
 
     const initiateTransfer = async () => {
         try {
-            const response = await axios.post(`${BASE_URL}/account/transfer`, {
-                to: id,
-                amount
-            }, {
-                headers: {
-                    Authorization: "Bearer " + localStorage.getItem("token")
-                }
-            });
-            console.log(response.data); // Handle response if needed
-            navigate("/dashboard");
+            const response = await axios.post(
+                `${BASE_URL}/account/transfer`,
+                {
+                    to: id,
+                    amount,
+                },
+                {
+                    headers: {
+                        Authorization: "Bearer " + localStorage.getItem("token"),
+                    },
+                },
+            )
+            console.log(response.data)
+            navigate("/dashboard")
         } catch (error) {
-            console.error("Error initiating transfer:", error);
-            setErrorMessage("Insufficient balance or incorrect amount value.");
-            // if (error.response && error.response.status === 400) {
-            // } else {
-            //     setErrorMessage("An error occurred while processing your request.");
-            // }
+            console.error("Error initiating transfer:", error)
+            setErrorMessage("Insufficient balance or incorrect amount value.")
         }
-    };
+    }
 
     return (
-        <div className="flex justify-center h-screen bg-blue-100">
-            <div className="h-full flex flex-col justify-center">
-                <div className="border h-min text-card-foreground max-w-md p-4 space-y-8 w-96 bg-white shadow-lg rounded-lg">
-                    <div className="flex flex-col space-y-1.5 p-6">
-                        <h2 className="text-3xl font-bold text-center text-blue-800">Send Money</h2>
+        <>
+            <Appbar/>
+            <div className="flex justify-center items-center min-h-screen bg-gradient-to-r from-blue-100 to-blue-200 p-4">
+                <div className="max-w-md w-full bg-white shadow-2xl rounded-2xl overflow-hidden">
+                    <div className="bg-blue-600 p-6 text-white">
+                        <h2 className="text-3xl font-bold text-center">Send Money</h2>
                     </div>
-                    <div className="p-6">
+                    <div className="p-6 space-y-6">
                         <div className="flex items-center space-x-4">
-                            <div className="w-12 h-12 rounded-full bg-blue-500 flex items-center justify-center">
-                                <span className="text-2xl text-white">{name[0].toUpperCase()}</span>
+                            <div className="w-16 h-16 rounded-full bg-blue-500 flex items-center justify-center">
+                                <span className="text-3xl font-bold text-white">{name[0].toUpperCase()}</span>
                             </div>
-                            <h3 className="text-2xl font-semibold text-blue-800">{name}</h3>
+                            <h3 className="text-2xl font-semibold text-gray-800">{name}</h3>
                         </div>
                         <div className="space-y-4">
-                            <div className="space-y-2">
-                                <label htmlFor="amount" className="block text-sm font-medium text-gray-700">Amount (in Rs)</label>
+                            <div>
+                                <label htmlFor="amount" className="block text-sm font-medium text-gray-700 mb-1">
+                                    Amount (in Rs)
+                                </label>
                                 <input
                                     onChange={(e) => {
-                                        setAmount(e.target.value);
-                                        setErrorMessage(""); // Clear error message on input change
+                                        setAmount(Number(e.target.value))
+                                        setErrorMessage("")
                                     }}
                                     type="number"
                                     id="amount"
-                                    className="block w-full h-10 px-3 py-2 mt-1 rounded-md border border-gray-300 shadow-sm focus:ring-blue-500 focus:border-blue-500 sm:text-sm"
+                                    className="block w-full px-4 py-3 rounded-md border border-gray-300 shadow-sm focus:ring-blue-500 focus:border-blue-500 sm:text-sm"
                                     placeholder="Enter amount"
                                 />
-                                {errorMessage && (
-                                    <p className="text-xs text-red-500 mt-1">{errorMessage}</p>
-                                )}
+                                {errorMessage && <p className="text-sm text-red-600 mt-1">{errorMessage}</p>}
                             </div>
                             <button
                                 onClick={initiateTransfer}
-                                className="w-full h-10 px-4 py-2 flex justify-center items-center rounded-md bg-blue-500 text-white text-sm font-medium hover:bg-blue-600 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500 transition-all"
+                                className="w-full px-4 py-3 bg-blue-600 text-white text-sm font-medium rounded-md hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500 transition-all duration-200"
                             >
                                 Initiate Transfer
                             </button>
@@ -77,6 +78,7 @@ export const SendMoney = () => {
                     </div>
                 </div>
             </div>
-        </div>
-    );
-};
+        </>
+    )
+}
+

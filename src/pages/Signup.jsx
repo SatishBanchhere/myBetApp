@@ -8,7 +8,6 @@ import { useNavigate } from "react-router-dom";
 import config from "../config";
 const BASE_URL = config.BASE_URL;
 
-
 export const Signup = () => {
   const [firstName, setFirstName] = useState("");
   const [lastName, setLastName] = useState("");
@@ -35,58 +34,56 @@ export const Signup = () => {
   };
 
   return (
-    <div className="bg-blue-50 h-screen flex justify-center items-center">
-      <div className="flex flex-col justify-center">
-        <div className="rounded-lg bg-white w-80 text-center p-6 shadow-lg">
-          <Heading label={"Sign up"} className="text-blue-600" />
-          <SubHeading
-            label={"Enter your information to create an account"}
-            className="text-gray-500"
-          />
-          <InputBox
-            onChange={(e) => setFirstName(e.target.value)}
-            placeholder="John"
-            label={"First Name"}
-            className="mt-4"
-          />
-          <InputBox
-            onChange={(e) => setLastName(e.target.value)}
-            placeholder="Doe"
-            label={"Last Name"}
-            className="mt-4"
-          />
-          <InputBox
-            onChange={(e) => setUsername(e.target.value)}
-            placeholder="John@gmail.com"
-            label={"Email"}
-            className="mt-4"
-          />
-          <InputBox
-            onChange={(e) => setPassword(e.target.value)}
-            placeholder="123456"
-            label={"Password"}
-            type="password"
-            className="mt-4"
-          />
-          <div className="pt-4">
+      <div className="bg-gradient-to-r from-green-400 to-blue-500 min-h-screen flex justify-center items-center p-4">
+        <div className="max-w-md w-full">
+          <div className="rounded-2xl bg-white p-8 shadow-xl">
+            <Heading label="Sign up" className="text-3xl font-bold text-gray-800 mb-2" />
+            <SubHeading
+                label="Enter your information to create an account"
+                className="text-gray-600 mb-6"
+            />
+            <InputBox
+                onChange={(e) => setFirstName(e.target.value)}
+                placeholder="John"
+                label="First Name"
+                className="mb-4"
+            />
+            <InputBox
+                onChange={(e) => setLastName(e.target.value)}
+                placeholder="Doe"
+                label="Last Name"
+                className="mb-4"
+            />
+            <InputBox
+                onChange={(e) => setUsername(e.target.value)}
+                placeholder="john@example.com"
+                label="Email"
+                className="mb-4"
+            />
+            <InputBox
+                onChange={(e) => setPassword(e.target.value)}
+                placeholder="••••••••"
+                label="Password"
+                type="password"
+                className="mb-6"
+            />
             <button
-              onClick={handleSignUp}
-              className="w-full h-10 px-4 py-2 flex justify-center items-center rounded-md bg-blue-600 text-white text-sm font-medium hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500 transition-all"
+                onClick={handleSignUp}
+                className="w-full py-3 px-4 bg-green-600 text-white text-sm font-medium rounded-lg hover:bg-green-700 focus:outline-none focus:ring-2 focus:ring-green-500 focus:ring-offset-2 transition-all duration-200"
             >
               Sign up
             </button>
+            {error && (
+                <p className="text-red-500 text-sm mt-2">{error}</p>
+            )}
+            <BottomWarning
+                label="Already have an account?"
+                buttonText="Sign in"
+                to="/signin"
+                className="mt-6"
+            />
           </div>
-          {error && (
-            <p className="text-red-500 text-sm mt-2">{error}</p>
-          )}
-          <BottomWarning
-            label={"Already have an account?"}
-            buttonText={"Sign in"}
-            to={"/signin"}
-            className="mt-4"
-          />
         </div>
       </div>
-    </div>
   );
 };
